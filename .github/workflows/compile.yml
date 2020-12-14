@@ -29,6 +29,7 @@ jobs:
       - name: Save artifacts
         uses: actions/upload-artifact@v1.0.0
         with:
+          name: compiled files
           path: out/
       - name: Create GitHub release
         uses: Roang-zero1/github-upload-release-artifacts-action@master
