@@ -1,0 +1,15 @@
+name: Lint
+
+on:
+  push:
+   paths:
+     - '**.tex'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v1
+      - name: LaTeX linter (chktex)
+        uses: j2kun/chktex-action@1.0.3

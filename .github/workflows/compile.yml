@@ -1,0 +1,38 @@
+name: Compile
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v1
+      - name: Compile LaTeX document 1
+        uses: dante-ev/latex-action@master
+        with:
+          root_file: test1.tex
+          args: -interaction=nonstopmode -shell-escape
+      - name: Compile LaTeX document 2
+        uses: dante-ev/latex-action@master
+        with:
+          root_file: test2.tex
+          args: -interaction=nonstopmode -shell-escape
+      - name: Collect artifacts
+        run: |
+          rm -rf out
+          mkdir -p out
+          mv *.pdf out
+      - name: Save artifacts
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          path: out/
+      - name: Create GitHub release
+        uses: Roang-zero1/github-upload-release-artifacts-action@master
+        with:
+          args: out/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
