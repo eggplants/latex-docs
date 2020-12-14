@@ -31,9 +31,9 @@ jobs:
         with:
           name: compiled files
           path: out/
-      - name: Create GitHub release
-        uses: Roang-zero1/github-upload-release-artifacts-action@master
+      - name: Create release
+        uses: ncipollo/release-action@v1
         with:
-          args: out/
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: out/*.pdf
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref }}
