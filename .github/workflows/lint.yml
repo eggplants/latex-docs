@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: LaTeX linter (chktex)
         uses: j2kun/chktex-action@1.0.3
